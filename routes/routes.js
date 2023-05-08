@@ -55,7 +55,6 @@ router.post('/login', (req, res) => {
       req.session.user = { id: user.id, username: user.username };
       // Redirect to the dashboard
       res.cookie('loggedIn', 'true', { maxAge: 7200000, httpOnly: true });
-
       res.redirect('/action/addItem');
     } else {
       // Set an error message in the session data

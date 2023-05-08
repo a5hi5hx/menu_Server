@@ -1,6 +1,7 @@
 const express = require('express');
 require("dotenv").config();
 const mongoose = require("mongoose");
+const cookieParser = require('cookie-parser');
 
 const app = express();
 
@@ -22,6 +23,8 @@ app.use(express.json());
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use( express.static("public"));
+app.use(cookieParser());
+
 // Session middleware
 const session = require('express-session');
 app.use(session({
@@ -33,9 +36,15 @@ app.use(session({
 
 
 app.get('/', (req, res) => {
-    res.render('login', { message: req.session.message });
+  const loggedIn = req.cookies.loggedIn;
+  if (loggedIn === 'true') {  
+    next();
+  } else { 
+    res.redirect('/login');
+  }
 });
 app.get('/logout', function(req, res) {
+  res.clearCookie('loggedIn');
   req.session.destroy(function(err) {
     if(err) {
       console.log(err);
