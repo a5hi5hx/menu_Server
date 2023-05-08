@@ -171,12 +171,19 @@ favorites:addToFavorites,
 });
 
 router.get('/allitems', async (req, res) => {
+  // const query = {};
+  // const sort = {price: 1};
+  
   try {
-    const items = await Item.find();
-    res.json(items);
+   // const items = await Item.find();
+   const items = await Item.find().sort({ price: 1 }); 
+   res.json(items);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
+  
+ 
+  
 });
 
     module.exports = router;
