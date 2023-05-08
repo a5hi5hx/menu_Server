@@ -26,22 +26,22 @@ const users = [
       next();
     } else {
       // User is not logged in, redirect to login page
-      res.redirect('/login');
+      res.redirect('/');
     }
   };
   // Authentication middleware
-const authenticateUser = (req, res, next) => {
-    if (req.session && req.session.user) {
-      // If user is authenticated, proceed to next middleware
-      return next();
-    } else {
-      // If user is not authenticated, redirect to login page
-      return res.redirect('/');
-    }
-  };
-  router.get('/login', checkLoggedIn, (req, res)=> {
-    res.render("login");
-    });
+// const authenticateUser = (req, res, next) => {
+//     if (req.session && req.session.user) {
+//       // If user is authenticated, proceed to next middleware
+//       return next();
+//     } else {
+//       // If user is not authenticated, redirect to login page
+//       return res.redirect('/');
+//     }
+//   };
+//   router.get('/login', checkLoggedIn, (req, res)=> {
+//     res.render("login");
+//     });
 
 // Login endpoint
 router.post('/login', (req, res) => {
