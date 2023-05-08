@@ -28,7 +28,7 @@ app.use(cookieParser());
 // Session middleware
 const session = require('express-session');
 app.use(session({
-  secret: 'secret-key',
+  secret: process.env.secretkey,
   resave: false,
   saveUninitialized: true,
  
