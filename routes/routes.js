@@ -20,7 +20,15 @@ const users = [
       password: process.env.adminpassword
     }
   ];
-
+  const checkLoggedIn = (req, res, next) => {
+    if (req.cookies.loggedIn === 'true') {
+      // User is logged in, proceed to next middleware
+      next();
+    } else {
+      // User is not logged in, redirect to login page
+      res.redirect('/login');
+    }
+  };
   // Authentication middleware
 const authenticateUser = (req, res, next) => {
     if (req.session && req.session.user) {
@@ -31,9 +39,10 @@ const authenticateUser = (req, res, next) => {
       return res.redirect('/');
     }
   };
-  router.get('/login', (req, res)=> {
+  router.get('/login', checkLoggedIn, (req, res)=> {
     res.render("login");
     });
+
 // Login endpoint
 router.post('/login', (req, res) => {
     const { username, password } = req.body;
@@ -45,7 +54,8 @@ router.post('/login', (req, res) => {
       // Set the user session data
       req.session.user = { id: user.id, username: user.username };
       // Redirect to the dashboard
-     
+      res.cookie('loggedIn', 'true', { maxAge: 7200000, httpOnly: true });
+
       res.redirect('/action/addItem');
     } else {
       // Set an error message in the session data
@@ -54,7 +64,8 @@ router.post('/login', (req, res) => {
       res.redirect('/');
     }
   });
-  router.get('/addItem', authenticateUser, (req, res)=> {
+
+  router.get('/addItem', checkLoggedIn, (req, res)=> {
     res.render("add_item");
     });
 // handle form submission from HTML page
@@ -110,6 +121,7 @@ console.log(req.body);
   favorites:addToFavorites,
       });
       item.save().then((item) => {
+
         res.redirect("/action/addItem");
                 
               })
