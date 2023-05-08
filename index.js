@@ -38,7 +38,7 @@ app.use(session({
 app.get('/', (req, res) => {
   const loggedIn = req.cookies.loggedIn;
   if (loggedIn === 'true') {  
-    next();
+    res.redirect('/action/addItem');
   } else { 
     res.redirect('/login');
   }
