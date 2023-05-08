@@ -14,43 +14,43 @@
             reader.readAsDataURL(file);
           }
         }
-		function validateForm() {
-  var fileInput = document.getElementById("image");
+// 		function validateForm() {
+//   var fileInput = document.getElementById("image");
 
-  // Display loading screen
-  var loadingScreen = document.createElement('div');
-  loadingScreen.classList.add('loading-screen');
-  document.body.appendChild(loadingScreen);
+//   // Display loading screen
+//   var loadingScreen = document.createElement('div');
+//   loadingScreen.classList.add('loading-screen');
+//   document.body.appendChild(loadingScreen);
 
-  // Make API call
-  var formData = new FormData(document.getElementById("item-form"));
-  fetch('/action/addItem', {
-    method: 'POST',
-    body: formData
-  })
-  .then(response => {
-	console.log(response);
-    // Check for errors
-    if (!response.status) {
-      throw new Error(response.status);
-    }
+//   // Make API call
+//   var formData = new FormData(document.getElementById("item-form"));
+//   fetch('/action/addItem', {
+//     method: 'POST',
+//     body: formData
+//   })
+//   .then(response => {
+// 	console.log(response);
+//     // Check for errors
+//     if (!response.status) {
+//       throw new Error(response.status);
+//     }
 
-    // Success message
-    alert("Item added successfully.");
-  })
-  .catch(error => {
-    // Error message
-    alert("Error: " + error.message);
-  })
-  .finally(() => {
-    // Hide loading screen after a 5-second delay
-    setTimeout(() => {
-      document.body.removeChild(loadingScreen);
-    }, 5000);
-  });
+//     // Success message
+//     alert("Item added successfully.");
+//   })
+//   .catch(error => {
+//     // Error message
+//     alert("Error: " + error.message);
+//   })
+//   .finally(() => {
+//     // Hide loading screen after a 5-second delay
+//     setTimeout(() => {
+//       document.body.removeChild(loadingScreen);
+//     }, 5000);
+//   });
 
-  return false;
-}
+//   return false;
+// }
 
 
 
@@ -160,7 +160,7 @@
 			
 		  </div>
 		<!-- <form id="item-form" method="POST" action="/action/addItem" enctype="multipart/form-data"> -->
-			<form id="item-form" method="POST" onsubmit="validateForm()">
+			<form id="item-form" method="POST" action="/action/addItem" enctype="multipart/form-data">
 
 		<div class="left-side">
 			<h2>Item Submission Form</h2>
