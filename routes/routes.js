@@ -39,7 +39,7 @@ const users = [
 //       return res.redirect('/');
 //     }
 //   };
-  router.get('/login', checkLoggedIn, (req, res)=> {
+  router.get('/login' , (req, res)=> {
     res.render("login");
     });
 
@@ -60,7 +60,7 @@ router.post('/login', (req, res) => {
       // Set an error message in the session data
       req.session.message = 'Invalid username or password';
       // Redirect to the login page
-      res.redirect('/');
+      res.redirect('/action/login');
     }
   });
 
