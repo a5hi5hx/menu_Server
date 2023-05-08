@@ -40,7 +40,7 @@ app.get('/', (req, res) => {
   if (loggedIn === 'true') {  
     res.redirect('/action/addItem');
   } else { 
-    res.redirect('/login');
+    res.redirect('/action/login');
   }
 });
 app.get('/logout', function(req, res) {
