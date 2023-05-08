@@ -39,9 +39,9 @@ const users = [
 //       return res.redirect('/');
 //     }
 //   };
-//   router.get('/login', checkLoggedIn, (req, res)=> {
-//     res.render("login");
-//     });
+  router.get('/login', checkLoggedIn, (req, res)=> {
+    res.render("login");
+    });
 
 // Login endpoint
 router.post('/login', (req, res) => {
