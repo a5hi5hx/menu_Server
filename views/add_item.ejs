@@ -24,7 +24,7 @@
 
   // Make API call
   var formData = new FormData(document.getElementById("item-form"));
-  fetch('/addItem', {
+  fetch('/action/addItem', {
     method: 'POST',
     body: formData
   })
